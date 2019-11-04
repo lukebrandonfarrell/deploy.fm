@@ -23,7 +23,6 @@ export default withRouter(
         props.router.query.number || props.shows[0].displayNumber;
 
       this.state = {
-        currentShow,
         currentPlaying: currentShow,
       };
     }
@@ -33,14 +32,7 @@ export default withRouter(
       const { data: shows } = await axios.get(`${baseURL}/api/shows`);
       return { shows, baseURL };
     }
-
-    componentWillReceiveProps(nextProps) {
-      const { query } = nextProps.router;
-      if (query.number) {
-        this.setState({ currentShow: query.number });
-      }
-    }
-
+    
     setCurrentPlaying = currentPlaying => {
       console.log('Setting current playing');
       this.setState({ currentPlaying });
@@ -48,11 +40,7 @@ export default withRouter(
 
     render() {
       const { shows = [], baseURL } = this.props;
-      const { currentShow, currentPlaying } = this.state;
-      // Currently Shown shownotes
-      const show =
-        shows.find(showItem => showItem.displayNumber === currentShow) ||
-        shows[0];
+      const { currentPlaying } = this.state;
       // Currently Playing
       const current =
         shows.find(showItem => showItem.displayNumber === currentPlaying) ||
@@ -60,22 +48,17 @@ export default withRouter(
 
       return (
         <Page>
-          <Meta show={show} baseURL={baseURL} />
+          <Meta show={current} baseURL={baseURL} />
           <div className="wrapper">
             <main className="show-wrap" id="main" tabIndex="-1">
-              <Player show={current} />
               <ShowList
                 shows={shows}
-                currentShow={currentShow}
                 currentPlaying={currentPlaying}
-                setCurrentPlaying={this.setCurrentPlaying}
-              />
-              <ShowNotes
-                show={show}
                 setCurrentPlaying={this.setCurrentPlaying}
               />
             </main>
           </div>
+          <Player show={current} />
         </Page>
       );
     }

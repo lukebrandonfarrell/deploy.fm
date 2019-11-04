@@ -5,9 +5,6 @@ import Footer from './Footer';
 function Page({ children }) {
   return (
     <div className="page">
-      <a href="#main" className="skip-link">
-        Skip to content
-      </a>
       <Header />
       {children}
       <Footer />

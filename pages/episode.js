@@ -12,6 +12,7 @@ export default class SickPicksPage extends React.Component {
   };
 
   static async getInitialProps({ req }) {
+    console.log(req)
     const baseURL = getBaseURL(req);
     const { data: sickPicks } = await axios.get(`${baseURL}/api/sickpicks`);
     return { sickPicks, baseURL };

@@ -1,15 +1,10 @@
 .show
-  border-right 1px solid grey
   border-bottom 1px solid grey
-  border-left 10px solid grey
   background lightgrey
   position relative
   display flex
   @media (max-width: 650px)
     flex 1 0 auto
-  a
-    flex 1 1 auto
-    padding 10px
   &__playcontrols
     display flex
     align-items center
@@ -18,27 +13,29 @@
     flex-shrink 0
     padding 1rem
     button
-      background none
+      padding 0px
       border 0
-      outline-color yellow
+      width 30px
+      height 30px
+      border-radius 60px
+      background gradient
+      align-items center
+      justify-content center
       &:hover
-        color yellow
+        color red
+  &__notes
+    padding: 1rem;
+    padding-left: 0px;
+    width: 100%;
+    cursor pointer
+  &__row
+    display flex
+    flex-direction row
+    justify-content space-between
   &--dummy
     flex 1 0 auto
-  &--active
-    border-right-color white
+  &--playing
     background white
-    border-left 0
-    padding-left 1rem
-    &:before
-      display block
-      background grad
-      width 10px
-      height 100%
-      content ''
-      position absolute
-      top 0
-      left 0
   &__displayNumber
     text-transform uppercase
     margin 0
@@ -60,7 +57,7 @@
   flex-wrap wrap
 
 .showList
-  width 38%
+  width 100%
   display flex
   flex-direction column
   @media (max-width: 650px)
@@ -100,6 +97,6 @@
     font-size 2.5rem
   a
     color lighten(black, 20%)
-    border-bottom 1px solid yellow
+    border-bottom 1px solid red
     text-decoration none
 

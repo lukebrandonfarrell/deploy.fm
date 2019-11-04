@@ -5,7 +5,6 @@ import Show from './Show';
 const ShowList = ({
   shows,
   currentPlaying,
-  currentShow,
   setCurrentPlaying,
 }) => (
   <div className="showList">
@@ -13,7 +12,6 @@ const ShowList = ({
       <Show
         setCurrentPlaying={setCurrentPlaying}
         currentPlaying={currentPlaying}
-        currentShow={currentShow}
         key={show.number}
         show={show}
       />
@@ -25,7 +23,6 @@ const ShowList = ({
 ShowList.propTypes = {
   shows: PropTypes.array.isRequired,
   currentPlaying: PropTypes.string.isRequired,
-  currentShow: PropTypes.string.isRequired,
   setCurrentPlaying: PropTypes.func.isRequired,
 };
 

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FaPlay, FaPause } from 'react-icons/fa';
 import formatTime from '../lib/formatTime';
-import VolumeBars from './VolumeBars';
+import VolumeControl from './VolumeControl';
 
 export default class Player extends React.Component {
   static propTypes = {
@@ -150,10 +150,10 @@ export default class Player extends React.Component {
     document.querySelector('.bars').classList[method]('bars--paused'); // 💩
   };
 
-  volume = e => {
-    this.audio.volume = e.currentTarget.value;
+  volume = value => {
+    this.audio.volume = value;
     this.setState({
-      currentVolume: `${e.currentTarget.value}`,
+      currentVolume: `${value}`,
     });
   };
 
@@ -198,71 +198,63 @@ export default class Player extends React.Component {
 
     return (
       <div className="player">
-        <div className="player__section player__section--left">
-          <button
+        <button
+            className="player__control"
             onClick={this.togglePlay}
             aria-label={playing ? 'pause' : 'play'}
             type="button"
           >
             <p className="player__icon">{playing ? <FaPause /> : <FaPlay />}</p>
-            <p>
-              {formatTime(currentTime)} / {formatTime(duration)}
-            </p>
-          </button>
-        </div>
+        </button>
 
-        <div className="player__section player__section--middle">
-          {/* eslint-disable */}
-          <div
-            className="progress"
-            onClick={this.scrub}
-            onMouseMove={this.seekTime}
-            onMouseEnter={() => {
-              this.setState({ showTooltip: true });
-            }}
-            onMouseLeave={() => {
-              this.setState({ showTooltip: false });
-            }}
-            ref={x => (this.progress = x)}
-          >
-            {/* eslint-enable */}
+        <p className="player__duration">
+            {formatTime(currentTime)} / {formatTime(duration)}
+        </p>
 
+        <div
+          className="progress"
+          onClick={this.scrub}
+          onMouseMove={this.seekTime}
+          onMouseEnter={() => {
+            this.setState({ showTooltip: true });
+          }}
+          onMouseLeave={() => {
+            this.setState({ showTooltip: false });
+          }}
+          ref={x => (this.progress = x)}
+        >
+
+        <div
+          className="progress__time"
+          style={{ width: `${progressTime}%` }}
+        />
             <div
-              className="progress__time"
-              style={{ width: `${progressTime}%` }}
-            />
-          </div>
-          <h3 className="player__title">
-            Playing: {show.displayNumber}: {show.title}
-          </h3>
-          <div
             className="player__tooltip"
             style={{
-              left: `${tooltipPosition}px`,
+              left: `${tooltipPosition + 123}px`,
               opacity: `${showTooltip ? '1' : '0'}`,
             }}
           >
             {tooltipTime}
           </div>
+
         </div>
 
-        <div className="player__section player__section--right">
-          <button
-            onClick={this.speedUp}
-            onContextMenu={this.speedDown}
-            className="player__speed"
-            type="button"
-          >
-            <p>FASTNESS</p>
-            <span className="player__speeddisplay">{playbackRate} &times;</span>
-          </button>
-          <div className="player__volume">
-            <p>LOUDNESS</p>
-            <div className="player__inputs">
-              <VolumeBars volume={this.volume} />
-            </div>
-          </div>
-        </div>
+        <button
+          onClick={this.speedUp}
+          onContextMenu={this.speedDown}
+          className="player__speed"
+          type="button"
+        >
+          <span className="player__speeddisplay">{playbackRate} &times;</span>
+        </button>
+        
+        <VolumeControl volume={this.volume} />
+
+        <h3 className="player__title">
+          Playing: {show.displayNumber}: {show.title}
+        </h3>
+
         {/* eslint-disable */}
         <audio
           ref={audio => (this.audio = audio)}
