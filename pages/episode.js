@@ -5,32 +5,15 @@ import Meta from '../components/meta';
 import Page from '../components/Page';
 import getBaseURL from '../lib/getBaseURL';
 
-export default class SickPicksPage extends React.Component {
-  static propTypes = {
-    sickPicks: PropTypes.array.isRequired,
-    baseURL: PropTypes.string.isRequired,
-  };
-
-  static async getInitialProps({ req }) {
-    console.log(req)
-    const baseURL = getBaseURL(req);
-    const { data: sickPicks } = await axios.get(`${baseURL}/api/sickpicks`);
-    return { sickPicks, baseURL };
-  }
-
+export default class EpisodePage extends React.Component {
   render() {
-    const { sickPicks = [], baseURL } = this.props;
+    const { baseURL } = this.props;
 
     return (
       <Page>
         <Meta baseURL={baseURL} staticPage={{ title: 'Sick Picks' }} />
         <div className="wrapper wrapper--text">
-          {sickPicks.map(sickPick => (
-            <div
-              key={sickPick.id}
-              dangerouslySetInnerHTML={{ __html: sickPick.html }} //eslint-disable-line
-            />
-          ))}
+          
         </div>
       </Page>
     );
