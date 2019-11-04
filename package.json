@@ -1,6 +1,6 @@
 {
   "name": "Deploy",
-  "description": "Full Stack Developers Wes Bos and Scott Tolinski dive deep into web development topics, explaining how they work and talking about their own experiences. They cover from JavaScript frameworks like React, to the latest advancements in CSS to simplifying web tooling.",
+  "description": "The Mobile-First radio station about deploting digital products",
   "engines": {
     "node": ">=8.1.2"
   },
@@ -15,8 +15,8 @@
   },
   "now": {
     "alias": [
-      "syntax",
-      "syntax.fm"
+      "deploy",
+      "deploy.fm"
     ]
   },
   "dependencies": {

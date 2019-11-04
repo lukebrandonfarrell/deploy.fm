@@ -3,7 +3,7 @@ import { description } from '../package.json';
 import stylesheet from '../styles/style.styl';
 import getBaseURL from '../lib/getBaseURL';
 
-class SyntaxDocument extends Document {
+class DeployDocument extends Document {
   static async getInitialProps(ctx) {
     const { req } = ctx;
     const baseURL = getBaseURL(req);
@@ -22,10 +22,10 @@ class SyntaxDocument extends Document {
           <meta name="theme-color" content="#F1C15D" />
           <meta charSet="utf-8" />
           <meta property="og:description" content={description} />
-          <meta
+          {/* <meta
             property="og:image"
             content={`${baseURL}/static/syntax-banner.png`}
-          />
+          /> */}
           <link rel="shortcut icon" href={`${baseURL}/static/favicon.png`} />
           <style
             // eslint-disable-next-line react/no-danger
@@ -41,4 +41,4 @@ class SyntaxDocument extends Document {
   }
 }
 
-export default SyntaxDocument;
+export default DeployDocument;
