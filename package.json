@@ -27,7 +27,7 @@
     "@fortawesome/pro-solid-svg-icons": "^5.11.2",
     "@fortawesome/react-fontawesome": "^0.1.7",
     "autoprefixer": "8.6.3",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "babel-plugin-module-resolver": "3.1.1",
     "babel-plugin-wrap-in-js": "^1.1.1",
     "date-fns": "^2.0.0-alpha.26",
